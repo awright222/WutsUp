@@ -1,0 +1,35 @@
+.app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .main-content {
+    display: flex;
+    width: 100%;
+  }
+  
+  .friends-panel {
+    width: 250px;
+    border-right: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .friends-panel ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .friends-panel li {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 5px 0;
+  }
+  
+  .friends-panel li img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }

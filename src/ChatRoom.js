@@ -1,38 +1,44 @@
 import { useEffect, useState } from "react";
 import { db, auth } from "./firebaseConfig";
-import { collection, addDoc, query, orderBy, onSnapshot, serverTimestamp } from "firebase/firestore";
+import { collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, where } from "firebase/firestore";
 
-function ChatRoom({ user }) {
+function ChatRoom({ user, selectedFriend }) {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-  const [loading, setLoading] = useState(true); // Optional: Show loading indicator
+  const [loading, setLoading] = useState(true);
 
-  // Fetch messages in real-time
   useEffect(() => {
-    const q = query(collection(db, "messages"), orderBy("createdAt"));
+    if (!selectedFriend) return;
+
+    const q = query(
+      collection(db, "messages"),
+      where("participants", "array-contains", user.uid),
+      orderBy("createdAt")
+    );
     const unsubscribe = onSnapshot(q, (snapshot) => {
       setMessages(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-      setLoading(false); // Once data is fetched, set loading to false
+      setLoading(false);
     });
 
-    return () => unsubscribe(); // Clean up listener on component unmount
-  }, []);
+    return () => unsubscribe();
+  }, [selectedFriend, user.uid]);
 
   const sendMessage = async () => {
-    if (newMessage.trim() === "") return; // Don't send empty messages
+    if (newMessage.trim() === "") return;
     await addDoc(collection(db, "messages"), {
       text: newMessage,
       createdAt: serverTimestamp(),
-      user: auth.currentUser.displayName, // Store the name of the user sending the message
+      user: auth.currentUser.displayName,
+      participants: [user.uid, selectedFriend.userId],
     });
-    setNewMessage(""); // Clear the message input
+    setNewMessage("");
   };
 
   return (
     <div>
-      <h2>Chat Room</h2>
+      <h2>Chat with {selectedFriend ? selectedFriend.friendEmail : "..."}</h2>
       {loading ? (
-        <p>Loading messages...</p> // Optional loading message
+        <p>Loading messages...</p>
       ) : (
         <div>
           {messages.map((msg) => (
