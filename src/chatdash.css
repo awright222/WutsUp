@@ -1,35 +1,128 @@
-.app-container {
+/* General App Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #EAE2B7; /* Light background */
+    color: #003049; /* Text color */
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .app-container {
+    padding: 20px;
+  }
+  
+  button {
+    background-color: #F77F00; /* Orange */
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, background-color 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #D62828; /* Red */
+    transform: translateY(-3px); /* Hover animation */
+  }
+  
+  /* Sidebar Styles */
+  .sidebar {
+    width: 250px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: #003049;
+    color: #FCBF49;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    padding: 20px;
+    transition: transform 0.3s ease;
+    transform: translateX(-100%); /* Hidden by default */
   }
   
+  .sidebar.open {
+    transform: translateX(0); /* Show sidebar */
+  }
+  
+  .sidebar button {
+    background-color: transparent;
+    color: #FCBF49;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .sidebar button:hover {
+    background-color: #D62828;
+  }
+  
+  /* Dark Mode Styles */
+  body.dark-mode {
+    background-color: #2B2B2B;
+    color: #EAE2B7;
+  }
+  
+  button.dark-mode-toggle {
+    background-color: #003049;
+    color: #FCBF49;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button.dark-mode-toggle:hover {
+    background-color: #F77F00;
+  }
+  
+  /* Card Styles */
+  .card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: box-shadow 0.2s ease;
+  }
+  
+  .card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Main Content Layout */
   .main-content {
     display: flex;
-    width: 100%;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 20px;
+    flex-wrap: wrap;
   }
   
-  .friends-panel {
-    width: 250px;
-    border-right: 1px solid #ccc;
-    padding: 10px;
+  /* Responsive Layout */
+  @media (max-width: 768px) {
+    .main-content {
+      flex-direction: column;
+    }
+  
+    .sidebar {
+      width: 100%;
+      transform: translateX(0); /* Always show sidebar on mobile */
+    }
   }
   
-  .friends-panel ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .friends-panel li {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding: 5px 0;
-  }
-  
-  .friends-panel li img {
+  /* Spinner */
+  .spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #FCBF49;
+    border-radius: 50%;
     width: 30px;
     height: 30px;
-    border-radius: 50%;
-    margin-right: 10px;
+    animation: spin 1s linear infinite;
   }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
