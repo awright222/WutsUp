@@ -78,7 +78,6 @@ function App() {
             <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`} ref={sidebarRef}>
               <button>Home</button>
               <button>Settings</button>
-              <button>Data</button>
               <button>Friends</button>
             </div>
             
