@@ -79,6 +79,7 @@ function App() {
               <button>Home</button>
               <button>Settings</button>
               <button>Data</button>
+              <button>Friends</button>
             </div>
             
             <div className="card">
