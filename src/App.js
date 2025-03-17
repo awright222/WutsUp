@@ -78,7 +78,7 @@ function App() {
             <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`} ref={sidebarRef}>
               <button>Home</button>
               <button>Settings</button>
-              {/* Add more sidebar links as needed */}
+              <button>Data</button>
             </div>
             
             <div className="card">
